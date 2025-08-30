@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 echo "== Sync"
+
 #Exit immediately if any command returns a non-zero status
 set -e
 
@@ -8,6 +9,7 @@ if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. ./bucket my-bucket-name"
     exit 1
 fi
+
 
 # Check for file name prefix
 if [ -z "$1" ]; then
