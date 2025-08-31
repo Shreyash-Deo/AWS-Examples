@@ -27,6 +27,34 @@ tasks:
   #    ./bin/powershell_cli_install.sh
 
   # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+  - name: install-powershell
+    before: |
+      # Update package list
+      sudo apt-get update
+
+      # Install prerequisites
+      sudo apt-get install -y wget apt-transport-https software-properties-common
+
+      # Get Ubuntu version
+      source /etc/os-release
+
+      # Download the Microsoft repository keys
+      wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
+
+      # Register the Microsoft repository keys
+      sudo dpkg -i packages-microsoft-prod.deb
+
+      # Clean up
+      rm packages-microsoft-prod.deb
+
+      # Update package list after adding repo
+      sudo apt-get update
+
+      # Install PowerShell
+      sudo apt-get install -y powershell
+      
+
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
